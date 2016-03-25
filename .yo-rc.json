@@ -1,0 +1,7 @@
+{
+  "generator-react-webpack": {
+    "appName": "timeMobile",
+    "style": "less",
+    "postcss": false
+  }
+}
