@@ -35,7 +35,8 @@ module.exports = {
       sources: `${defaultSettings.srcPath}/sources/`,
       stores: `${defaultSettings.srcPath}/stores/`,
       styles: `${defaultSettings.srcPath}/styles/`,
-      config: `${defaultSettings.srcPath}/config/` + process.env.REACT_WEBPACK_ENV
+      config: `${defaultSettings.srcPath}/config/` + process.env.REACT_WEBPACK_ENV,
+      vendor: path.join(__dirname, '/../vendor/')
     }
   },
   module: {}

@@ -1,22 +1,20 @@
-require('normalize.css');
-require('styles/App.css');
+import 'styles/app.less';
 
 import React from 'react';
 
-let yeomanImage = require('../images/yeoman.png');
-
-class AppComponent extends React.Component {
-  render() {
-    return (
-      <div className="index">
-        <img src={yeomanImage} alt="Yeoman Generator" />
-        <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
-      </div>
-    );
-  }
-}
-
-AppComponent.defaultProps = {
-};
+const AppComponent = () => (
+  <header>
+    <div className="uui-header blue">
+      <nav>
+        <div className="sidebar-toggle-box blue">
+          <div title="Toggle Navigation" className="sidebar-tooltip">
+            <span className="fa fa-reorder" />
+          </div>
+        </div>
+        <a href="#" className="brand-logo">TRT</a>
+      </nav>
+    </div>
+  </header>
+);
 
 export default AppComponent;
