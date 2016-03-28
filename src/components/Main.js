@@ -4,10 +4,12 @@ import React from 'react';
 import AltContainer from 'alt-container';
 import ProjectsStore from 'stores/ProjectsStore';
 import ProjectsList from 'components/ProjectsList';
+import ActivitiesStore from 'stores/ActivitiesStore';
 
 class AppComponent extends React.Component {
   componentWillMount() {
     ProjectsStore.find();
+    ActivitiesStore.find();
   }
 
   render() {
