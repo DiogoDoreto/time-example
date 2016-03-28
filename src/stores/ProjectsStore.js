@@ -1,6 +1,8 @@
 import alt from 'components/Dispatcher';
 import ProjectsActions from 'actions/ProjectsActions';
 import ProjectsSource from 'sources/ProjectsSource';
+import FilterStore from 'stores/FilterStore';
+import FilterActions from 'actions/FilterActions';
 
 class ProjectsStore {
   constructor() {
@@ -9,6 +11,12 @@ class ProjectsStore {
 
     this.registerAsync(ProjectsSource);
     this.bindActions(ProjectsActions);
+    this.bindListeners({
+      changeFilter: FilterActions.changeFilter,
+    });
+    this.exportPublicMethods({
+      getFilteredProjects: this.getFilteredProjects,
+    });
   }
 
   onFind() {
@@ -23,6 +31,19 @@ class ProjectsStore {
   onFindError(data) {
     this.isLoading = false;
     console.error(data);
+  }
+
+  changeFilter() {}
+
+  getFilteredProjects() {
+    const filter = FilterStore.getState().projects;
+    const projects = this.getState().projects;
+
+    if (!filter) {
+      return projects;
+    }
+
+    return projects.filter(project => filter.indexOf(project.id) >= 0);
   }
 }
 

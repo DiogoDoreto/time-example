@@ -2,6 +2,9 @@ import 'styles/app.less';
 
 import React from 'react';
 import AltContainer from 'alt-container';
+import FilterStore from 'stores/FilterStore';
+import FilterActions from 'actions/FilterActions';
+import FilterBar from 'components/FilterBar';
 import ProjectsStore from 'stores/ProjectsStore';
 import ProjectsList from 'components/ProjectsList';
 import ActivitiesStore from 'stores/ActivitiesStore';
@@ -10,6 +13,37 @@ class AppComponent extends React.Component {
   componentWillMount() {
     ProjectsStore.find();
     ActivitiesStore.find();
+  }
+
+  renderFilter() {
+    const transform = () => ({
+      projects: ProjectsStore.getState().projects,
+      filter: FilterStore.getState(),
+      changeFilter: FilterActions.changeFilter,
+    });
+
+    return (
+      <AltContainer
+        stores={{ FilterStore, ProjectsStore }}
+        actions={{ FilterActions }}
+        transform={transform}
+        component={FilterBar}
+      />
+    );
+  }
+
+  renderProjectsList() {
+    const transform = () => ({
+      projects: ProjectsStore.getFilteredProjects(),
+    });
+
+    return (
+      <AltContainer
+        stores={{ ProjectsStore }}
+        transform={transform}
+        component={ProjectsList}
+      />
+    );
   }
 
   render() {
@@ -28,7 +62,8 @@ class AppComponent extends React.Component {
           </div>
         </header>
         <div className="container">
-          <AltContainer store={ProjectsStore} component={ProjectsList} />
+          { this.renderFilter() }
+          { this.renderProjectsList() }
         </div>
       </div>
     );

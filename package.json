@@ -67,6 +67,7 @@
     "alt": "^0.18.4",
     "alt-container": "^1.0.2",
     "core-js": "^2.0.0",
+    "lodash": "^4.6.1",
     "normalize.css": "^3.0.3",
     "react": "^0.14.0",
     "react-dom": "^0.14.0"
